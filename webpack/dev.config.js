@@ -3,14 +3,10 @@ const HTMLWebpackPlugin = require('html-webpack-plugin')
 
 process.env.NODE_ENV = 'production'
 
-// TODO: Minify files
-// TODO: Uglify files
-// TODO: Uglify file names
-
-// FIXME: all js files are imported in the html by default
+// TODO: Enable source maps
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   // Default ./src/index.js
   entry: {
     app: './src/index.js',
