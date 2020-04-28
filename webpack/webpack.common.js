@@ -6,28 +6,19 @@ process.env.NODE_ENV = 'production'
 // TODO: Enable source maps
 
 module.exports = {
-  mode: 'development',
-  // Default ./src/index.js
-  // Remove 'eval' and see code relatively unchanged
-  // devtool: 'none',
   entry: {
     app: './src/index.js',
     script: './src/script.js',
   },
   output: {
-    // Default: ./dist
     path: path.join(__dirname, '../public'),
-    // Default: main.js
-    filename: '[name].bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
+        use: ['babel-loader'],
       },
       {
         test: /\.css$/,
@@ -40,6 +31,20 @@ module.exports = {
           'css-loader', // 2. Turns css into commonjs
           'sass-loader', // 1. Turns sass into css
         ],
+      },
+      {
+        test: /\.html$/,
+        use: ['html-loader'],
+      },
+      {
+        test: /\.(svg|png|jpg|jpeg|gif)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[hash].[ext]',
+            outputPath: 'imgs',
+          },
+        },
       },
     ],
   },
