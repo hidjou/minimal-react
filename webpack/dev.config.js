@@ -8,6 +8,8 @@ process.env.NODE_ENV = 'production'
 module.exports = {
   mode: 'development',
   // Default ./src/index.js
+  // Remove 'eval' and see code relatively unchanged
+  // devtool: 'none',
   entry: {
     app: './src/index.js',
     script: './src/script.js',
@@ -26,6 +28,18 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         },
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader', // 3. Inject styles into DOM
+          'css-loader', // 2. Turns css into commonjs
+          'sass-loader', // 1. Turns sass into css
+        ],
       },
     ],
   },
