@@ -1,5 +1,4 @@
 const path = require('path')
-const HTMLWebpackPlugin = require('html-webpack-plugin')
 
 process.env.NODE_ENV = 'production'
 
@@ -21,22 +20,11 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader', // 3. Inject styles into DOM
-          'css-loader', // 2. Turns css into commonjs
-          'sass-loader', // 1. Turns sass into css
-        ],
-      },
-      {
         test: /\.html$/,
         use: ['html-loader'],
       },
       {
+        // All images are moved to 'public/imgs'
         test: /\.(svg|png|jpg|jpeg|gif)$/,
         use: {
           loader: 'file-loader',
@@ -48,9 +36,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new HTMLWebpackPlugin({
-      template: './src/index.html',
-    }),
-  ],
 }
